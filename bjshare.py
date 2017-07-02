@@ -32,46 +32,14 @@ from sickrage.providers.torrent.TorrentProvider import TorrentProvider
 
 class BJShareProvider(TorrentProvider):  # pylint: disable=too-many-instance-attributes
 
-    def searchcut(self, source, startsearch, endsearch, startpos=0, includetag=False):
-        start = 0
-
-        def finalresult(result):
-            if includetag:
-                return startsearch + result + endsearch
-            else:
-                return result
-
-        if startsearch:
-            start = source.find(startsearch, startpos)
-            if start == -1:
-                return {"pos":-1, "pos_end":-1, "txt":""}
-            start += len(startsearch)
-
-        end = 0
-
-        if endsearch:
-            end = source.find(endsearch, start)
-
-        if end == -1:
-            return {"pos":-1, "pos_end":-1, "txt":""}
-
-        if end == 0:
-            return {"pos":start, "pos_end":end, "txt": finalresult(source[start:])}
-
-        if start == 0:
-            return {"pos":start, "pos_end":end, "txt": finalresult(source[:end])}
-
-        return {"pos":start, "pos_end":end, "txt": finalresult(source[start:end])}
-
     def __init__(self):
 
        # Provider Init
-        TorrentProvider.__init__(self, "BJShare")
+        TorrentProvider.__init__(self, "BJ-Share")
 
         # URLs
         self.url = 'https://bj-share.me'
         self.urls = {
-            'login': urljoin(self.url, "index.php"),
             'detail': urljoin(self.url, "torrents.php?id=%s"),
             'search': urljoin(self.url, "torrents.php"),
             'download': urljoin(self.url, "%s"),
@@ -118,9 +86,6 @@ class BJShareProvider(TorrentProvider):  # pylint: disable=too-many-instance-att
 
         if self.cookies:
             add_dict_to_cookiejar(self.session.cookies, dict(x.rsplit('=', 1) for x in self.cookies.split(';')))
-            #undecoded_session = urllib.unquote(str(self.cookies))
-            #encoded_session = urllib.quote(str(undecoded_session))
-            #add_dict_to_cookiejar(self.session.cookies, {'session', encoded_session})
 
         cookie_dict = dict_from_cookiejar(self.session.cookies)
         if cookie_dict.get('session'):
@@ -131,6 +96,37 @@ class BJShareProvider(TorrentProvider):  # pylint: disable=too-many-instance-att
             if not success:
                 logger.log(status, logger.INFO)
                 return False
+
+    def searchcut(self, source, startsearch, endsearch, startpos=0, includetag=False):
+        start = 0
+
+        def finalresult(result):
+            if includetag:
+                return startsearch + result + endsearch
+            else:
+                return result
+
+        if startsearch:
+            start = source.find(startsearch, startpos)
+            if start == -1:
+                return {"pos":-1, "pos_end":-1, "txt":""}
+            start += len(startsearch)
+
+        end = 0
+
+        if endsearch:
+            end = source.find(endsearch, start)
+
+        if end == -1:
+            return {"pos":-1, "pos_end":-1, "txt":""}
+
+        if end == 0:
+            return {"pos":start, "pos_end":end, "txt": finalresult(source[start:])}
+
+        if start == 0:
+            return {"pos":start, "pos_end":end, "txt": finalresult(source[:end])}
+
+        return {"pos":start, "pos_end":end, "txt": finalresult(source[start:end])}
 
     def search(self, search_strings, age=0, ep_obj=None):  # pylint: disable=too-many-locals
         results = []
