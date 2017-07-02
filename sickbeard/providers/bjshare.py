@@ -1,7 +1,7 @@
 # coding=utf-8
-# Author: Gonçalo M. (aka duramato/supergonkas) <supergonkas@gmail.com>
+# Author: Uilton de Oliveira (aka DarkSupremo) <contato@uiltonsites.com.br>
 #
-# URL: https://sickrage.github.io
+# URL: https://www.uiltonsites.com.br
 #
 # This file is part of SickRage.
 #
@@ -19,7 +19,6 @@
 # along with SickRage. If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import traceback
 from requests.compat import urljoin
 from requests.utils import dict_from_cookiejar
 from requests.utils import add_dict_to_cookiejar
@@ -29,8 +28,6 @@ from sickbeard.bs4_parser import BS4Parser
 
 from sickrage.helper.common import convert_size, try_int
 from sickrage.providers.torrent.TorrentProvider import TorrentProvider
-
-import urllib
 
 
 class BJShareProvider(TorrentProvider):  # pylint: disable=too-many-instance-attributes
