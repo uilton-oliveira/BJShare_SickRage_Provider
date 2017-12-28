@@ -1,3 +1,7 @@
+[![GitHub issues](https://img.shields.io/github/issues/DarkSupremo/BJShare_SickRage_Provider.svg?maxAge=60&style=flat-square)](https://github.com/DarkSupremo/BJShare_SickRage_Provider/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/DarkSupremo/BJShare_SickRage_Provider.svg?maxAge=60&style=flat-square)](https://github.com/DarkSupremo/BJShare_SickRage_Provider/pulls)
+[![Github Releases](https://img.shields.io/github/downloads/DarkSupremo/BJShare_SickRage_Provider/total.svg?maxAge=60&style=flat-square)](https://github.com/DarkSupremo/BJShare_SickRage_Provider/releases/latest)
+
 # BJShare_SickRage_Provider
 
 Provider do bj-share.me para o SickRage, com busca para anime e seriado (foco em anime)
